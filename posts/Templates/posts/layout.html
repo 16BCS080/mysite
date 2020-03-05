@@ -1,0 +1,55 @@
+<html>
+<head>
+
+<style>
+
+img{
+width:200px;
+height:70px;
+}
+table,th,td{
+color:pink;
+border:3px solid gray;
+width:900px;
+height:150px;
+}
+form {
+  position:fixed;
+  width:100%;
+  background-color: blue;
+  height:55px;
+   padding: 7px 8px;
+  color:yellow
+}
+form hover {
+  background-color: white;
+}
+a{
+float: right;
+  color: #f2f2f2;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 24px;
+
+}
+
+
+</style>
+{% block head_extra %}
+	{% endblock %}
+</head>
+<body >
+            <form  action="/" >
+                 ONLINESHOPING
+            <input type="text" name="search_query"   placeholder="Search"  style="width:400px"  />
+            <input type="submit" class="btn"  method="POST" value="Search">       
+            <input class="btn"  method="GET" type="submit" value="Clear All">
+			<a href="/admin">LOG IN</a>				
+            </form>
+<br><br><br><br><br>
+
+    <div class="container">
+	{%block content%}	
+	{%endblock%}
+	</div>
+</body><html>
