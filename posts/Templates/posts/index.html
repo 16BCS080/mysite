@@ -1,76 +1,82 @@
-{%extends 'posts/layout.html'%}
-{% block head_extra %}
-<style type="text/css">
-    
-    .product_page{margin-top: 50px;}
-    input[type="submit"]{margin-top: 10px;}
-    .thumbnail img{height: 200px;}
-    .col-md-4 {
-        max-height: 300px;
-        margin-bottom: 40px;
-    }
 
-    div#preloader { position: fixed; lef: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; }
-    /*.blocker{z-index:1000;height:100%;width:100%;background: gray; opacity:0.7; position: absolute;}*/
-    .blocker{z-index:1000;height:100%;width:100%;background: #ccc; opacity:0.7; position: absolute;}
-    #loader {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 1;
-      width: 150px;
-      height: 150px;
-      margin: -75px 0 0 -75px;
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid #3498db;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
-    }
+ <html>
+<head>
+<style >
+table,th,td{
+border:3px solid grey;
+width:900px;
+height:150px;
+}
 
-
-    #myDiv {
-      display: none;
-      text-align: center;
-    }    
+ai {
+  position:fixed;
+  width:100%;
+  background-color: blue;
+  height:55px;
+   padding: 7px 8px;
+  color:yellow;
+}
+  body{
+  align:center;
+  }
 </style>
-
-{% endblock %}
-
-
-
+</head>
+<body>
+<ai >
+ONLINESHOPING
+<input id="text1" type="text" placeholder="SEARCH YOUR PRODUCT " style="width:400px;" >
+<button onclick="changed()" >SEARCH</button>
+<button onclick="link()" style="float:right;align:" >login</button>
+</ai>
+<br><br><br><br>
 {%block content%}
+<table>
+{% for post in posts %}
+<tr }>
+<td>{{post}}</td>
+<td><ol>prize:${{post.cost}}</ol>
+<ol>desc: {{post.description}}</ol></td>
+<td><button onclick="ope()">SHOP</button></td>
+</tr>
+{% endfor %}
+</table>
+<script  type="text/javascript">
+function changed(){
+  var r=document.getElementById("text1").value;
+   document.write("<table style='width:900px;height:150px;border:3px solid grey'>");
+   document.write("<tr><td></td><td>Result</td></tr>");
+ {% for post in posts %}
+  document.write("<tr >");
+ if("{{post}}"==r){
+ document.write("<tr>");
+  document.write("<td style='border:3px solid grey'>{{post}}</td>");
+    document.write("<td style='border:3px solid grey'>{{post.cost}}</td>");
+	document.write("<td style='border:3px solid grey'><button onclick='ope()'>BUY</button></td>");
+	document.write("</tr>");
+  }
+ 
+{% endfor %}
+ document.write("</table>");
+}
+function link(){
+window.open("/admin");
+}
+function ope(){
 
-        <div class="col-sm-9" id="shadow">                        
-            {% if posts %}
-                {% for post in posts %}
-                  <div class="col-sm-6 col-md-4">
-                      <img class="img-responsive" src="{{product.image.url}}" alt="{{post.title}}">
-                      <div class="caption" id="{{ forloop.counter }}">
-                        <h3> {{post.titlt}}</h3>
-						
-                        <p>PRICE : ${{post.cost}}<br>
-						   DESRIPTION:{{post.description}}
-						<a id="paymentButton_{{ forloop.counter }}" data-id="{{post.cost}}" style="float: right;color:blue;" href="#" class="paymentButton btn btn-primary" role="button">BUY NOW</a></p>
-                      </div>
-                  </div>
-                {% endfor %}
-            {% else %}
-                <h2>No product found.</h2>
-            {% endif %}
-        </div>
-
-< type="text/javascript">
-    jQuery(document).ready(function($) {  
-        $(window).load(function(){
-            $('#preloader').fadeOut('slow',function(){$(this).remove();});
-        });
-    });
-</script>  
+window.open("/admin/posts/posts/");
+}
+</script>
+{%endblock%} 
+</body>
+</html>
 
 
-{%endblock%}
+
+
+
+
+
+    
+
 
 
